@@ -9,12 +9,14 @@ function DetailsPage() {
     const [gift, setGift] = useState(null);
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(null);
+
     useEffect(() => {
         const authenticationToken = sessionStorage.getItem('auth-token');
         if (!authenticationToken) {
             // Task 1: Check for authentication and redirect
             navigate('/app/login');
         }
+
         // get the gift to be rendered on the details page
         const fetchGift = async () => {
             try {
@@ -32,14 +34,19 @@ function DetailsPage() {
                 setLoading(false);
             }
         };
+
         fetchGift();
+
         // Task 3: Scroll to top on component mount
         window.scrollTo(0, 0);
+
     }, [productId, navigate]);
+
     const handleBackClick = () => {
         // Task 4: Handle back click
         navigate(-1);
     };
+
     //The comments have been hardcoded for this project.
     const comments = [
         {
@@ -63,9 +70,11 @@ function DetailsPage() {
             comment: "My family can use one. DM me if it is still available. Thank you!"
         }
     ];
+
     if (loading) return <div>Loading...</div>;
     if (error) return <div>Error: {error}</div>;
     if (!gift) return <div>Gift not found</div>;
+
     return (
         <div className="container mt-5">
             <button className="btn btn-secondary mb-3" onClick={handleBackClick}>Back</button>
@@ -76,26 +85,26 @@ function DetailsPage() {
                 <div className="card-body">
                     <div className="image-placeholder-large">
                         {gift.image ? (
-                            // Task 5: Display gift image
-                            <img src={gift.image} alt={gift.name} className="product-image-large" />
+                                // Task 5: Display gift image
+                                <img src={gift.image} alt={gift.name} className="product-image-large" />
                         ) : (
-                            <div className="no-image-available-large">No Image Available</div>
+                                <div className="no-image-available-large">No Image Available</div>
                         )}
                     </div>
                     {/* Task 6: Display gift details */}
-                    <p><strong>Category:</strong> 
+                    <p><strong>Category:</strong>
                         {gift.category}
                     </p>
-                    <p><strong>Condition:</strong> 
+                    <p><strong>Condition:</strong>
                         {gift.condition}
                     </p>
-                    <p><strong>Date Added:</strong> 
+                    <p><strong>Date Added:</strong>
                         {gift.dateAdded}
                     </p>
-                    <p><strong>Age (Years):</strong> 
+                    <p><strong>Age (Years):</strong>
                         {gift.age}
                     </p>
-                    <p><strong>Description:</strong> 
+                    <p><strong>Description:</strong>
                         {gift.description}
                     </p>
                 </div>
@@ -104,15 +113,16 @@ function DetailsPage() {
                 <h3 className="mb-3">Comments</h3>
                 {/* Task 7: Render comments section */}
                 {comments.map((comment, index) => (
-                    <div key={index} className="card mb-3">
-                        <div className="card-body">
-                            <p className="comment-author"><strong>{comment.author}:</strong></p>
-                            <p className="comment-text">{comment.comment}</p>
+                        <div key={index} className="card mb-3">
+                            <div className="card-body">
+                                <p className="comment-author"><strong>{comment.author}:</strong></p>
+                                <p className="comment-text">{comment.comment}</p>
+                            </div>
                         </div>
-                    </div>
                 ))}
             </div>
         </div>
     );
 }
+
 export default DetailsPage;
