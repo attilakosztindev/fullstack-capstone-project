@@ -20,9 +20,8 @@ function App() {
         <Route path="/app" element={<MainPage />} />
         <Route path="/app/login" element={<LoginPage/>} />
         <Route path="/app/register" element={<RegisterPage />} />
-        <Route path="/app/details" element={<DetailsPage/>} />
-        <Route path="/app/search" element={<SearchPage/>} />
-
+        <Route path="/app/search" element={<SearchPage />} />
+        <Route path="/app/details/:productId" element={< DetailsPage />} />
       </Routes>
     </>
   );
