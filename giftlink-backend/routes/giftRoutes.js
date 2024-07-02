@@ -10,7 +10,6 @@ router.get('/', async (req, res, next) => {
 
         const collection = db.collection("gifts");
         const gifts = await collection.find({}).toArray();
-        console.log(res.json(gifts));
         res.json(gifts);
     } catch (e) {
         console.error('oops something went wrong', e)
